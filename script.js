@@ -16,43 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // JSON Schema Validator
     const ajv = new Ajv();
 
-    // Load JSON Schemas for protocols
-    const schemas = {
-        vless: {
-            type: "object",
-            properties: {
-                protocol: { type: "string", enum: ["vless"] },
-                settings: { type: "object" },
-                streamSettings: { type: "object" },
-            },
-            required: ["protocol", "settings", "streamSettings"],
+    // Schema for VLESS and VMESS
+    const v2raySchema = {
+        type: "object",
+        properties: {
+            protocol: { type: "string", enum: ["vless", "vmess"] },
+            settings: { type: "object" },
+            streamSettings: { type: "object" },
         },
-        vmess: {
-            type: "object",
-            properties: {
-                protocol: { type: "string", enum: ["vmess"] },
-                settings: { type: "object" },
-                streamSettings: { type: "object" },
-            },
-            required: ["protocol", "settings", "streamSettings"],
-        },
-        shadowsocks: {
-            type: "object",
-            properties: {
-                protocol: { type: "string", enum: ["shadowsocks"] },
-                settings: { type: "object" },
-            },
-            required: ["protocol", "settings"],
-        },
-        trojan: {
-            type: "object",
-            properties: {
-                protocol: { type: "string", enum: ["trojan"] },
-                settings: { type: "object" },
-                streamSettings: { type: "object" },
-            },
-            required: ["protocol", "settings", "streamSettings"],
-        },
+        required: ["protocol", "settings", "streamSettings"],
     };
 
     // Render Configs
@@ -87,8 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const protocol = content.protocol;
-        const isValid = ajv.validate(schemas[protocol], content);
+        const isValid = ajv.validate(v2raySchema, content);
         if (!isValid) {
             alert('Invalid V2Ray configuration: ' + ajv.errorsText());
             return;
