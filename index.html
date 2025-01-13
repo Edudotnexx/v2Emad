@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V2Ray Toolbox</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8">V2Ray Toolbox</h1>
+
+        <!-- Buttons for Import/Export -->
+        <div class="flex space-x-4 mb-8">
+            <button id="import-config" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Import Config</button>
+            <button id="export-config" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Export Config</button>
+        </div>
+        <input type="file" id="file-input" class="hidden" accept=".json">
+
+        <!-- Config List -->
+        <div id="config-list" class="space-y-4">
+            <!-- Config items will be dynamically added here -->
+        </div>
+
+        <!-- Add New Config Button -->
+        <button id="add-config" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Add New Config
+        </button>
+
+        <!-- Config Editor (Hidden by default) -->
+        <div id="config-editor" class="mt-8 p-6 bg-white rounded-lg shadow-md hidden">
+            <h2 class="text-2xl font-bold mb-4">Edit Configuration</h2>
+            <div class="space-y-4">
+                <div>
+                    <label for="config-name" class="block text-sm font-medium text-gray-700">Config Name</label>
+                    <input type="text" id="config-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                </div>
+                <div>
+                    <label for="config-content" class="block text-sm font-medium text-gray-700">Config Content (JSON)</label>
+                    <textarea id="config-content" rows="10" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="save-config" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Save Config</button>
+                    <button id="cancel-edit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ajv@8.11.0/dist/ajv.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
